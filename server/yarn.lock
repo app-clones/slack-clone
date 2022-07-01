@@ -2375,6 +2375,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"graphql-playground-html@npm:^1.6.30":
+  version: 1.6.30
+  resolution: "graphql-playground-html@npm:1.6.30"
+  dependencies:
+    xss: ^1.0.6
+  checksum: a17b8cd4f9c1dd94c4e2aafb5f39b80fbee20adaf80dccc2d6dfebcd0ebf65dc8d7c913bd387461a0360e61d0a7474512817c5fdb636e6c0d631603ed1e8b54c
+  languageName: node
+  linkType: hard
+
+"graphql-playground-middleware-express@npm:^1.7.23":
+  version: 1.7.23
+  resolution: "graphql-playground-middleware-express@npm:1.7.23"
+  dependencies:
+    graphql-playground-html: ^1.6.30
+  peerDependencies:
+    express: ^4.16.2
+  checksum: 65123c91e9e1d251d45bc9c1697cffb086925e429eedd7151334279c31fdb76eb8601c3e8ec8d56f3f253dc780932848b90d8a9d03f202dad14fd1e734de038d
+  languageName: node
+  linkType: hard
+
 "graphql-tag@npm:^2.11.0":
   version: 2.12.6
   resolution: "graphql-tag@npm:2.12.6"
@@ -4155,6 +4175,7 @@ __metadata:
     eslint-plugin-import: ^2.25.2
     express: ^4.18.1
     graphql: ^16.5.0
+    graphql-playground-middleware-express: ^1.7.23
     nodemon: ^2.0.18
     pg: ^8.7.3
     sequelize: ^6.21.2
@@ -4907,7 +4928,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"xss@npm:^1.0.8":
+"xss@npm:^1.0.6, xss@npm:^1.0.8":
   version: 1.0.13
   resolution: "xss@npm:1.0.13"
   dependencies:

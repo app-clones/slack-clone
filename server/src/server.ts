@@ -1,6 +1,7 @@
 import { ApolloServer } from "apollo-server-express";
 
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import expressPlayground from "graphql-playground-middleware-express";
 
 import express from "express";
 
@@ -12,6 +13,13 @@ export default async function startApolloServer(typeDefs: any, resolvers: any) {
     const app = express();
 
     app.use(express.json());
+
+    app.get(
+        "/playground",
+        expressPlayground({
+            endpoint: "/graphql"
+        })
+    );
 
     const httpServer = http.createServer(app);
 
