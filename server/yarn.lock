@@ -614,7 +614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.13.0":
+"@typescript-eslint/eslint-plugin@npm:^5.30.3":
   version: 5.30.3
   resolution: "@typescript-eslint/eslint-plugin@npm:5.30.3"
   dependencies:
@@ -637,7 +637,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.0.0":
+"@typescript-eslint/parser@npm:^5.30.3":
   version: 5.30.3
   resolution: "@typescript-eslint/parser@npm:5.30.3"
   dependencies:
@@ -4164,8 +4164,8 @@ __metadata:
   resolution: "server@workspace:."
   dependencies:
     "@types/node": ^18.0.0
-    "@typescript-eslint/eslint-plugin": ^5.13.0
-    "@typescript-eslint/parser": ^5.0.0
+    "@typescript-eslint/eslint-plugin": ^5.30.3
+    "@typescript-eslint/parser": ^5.30.3
     apollo-server: ^3.9.0
     apollo-server-core: ^3.9.0
     apollo-server-express: ^3.9.0
