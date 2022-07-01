@@ -6,6 +6,7 @@ import express from "express";
 
 import http from "http";
 import logger from "./utils/logger";
+import sequelize from "./models";
 
 export default async function startApolloServer(typeDefs: any, resolvers: any) {
     const app = express();
@@ -26,11 +27,13 @@ export default async function startApolloServer(typeDefs: any, resolvers: any) {
 
     server.applyMiddleware({ app });
 
-    await new Promise<void>((resolve) =>
-        httpServer.listen({ port: process.env.PORT || 4000 }, resolve)
-    );
+    sequelize.sync().then(async () => {
+        await new Promise<void>((resolve) =>
+            httpServer.listen({ port: process.env.PORT || 4000 }, resolve)
+        );
 
-    logger.info(
-        `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
-    );
+        logger.info(
+            `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
+        );
+    });
 }

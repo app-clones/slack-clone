@@ -10,5 +10,6 @@
         "**/.yarn": true,
         "**/yarn.lock": true,
         "**/.pnp.cjs": true
-    }
+    },
+    "eslint.workingDirectories": ["server"]
 }
