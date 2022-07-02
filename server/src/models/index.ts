@@ -11,6 +11,9 @@ const sequelize = new Sequelize({
     database: "slack",
     username: "beatzoid",
     password: "beatzoid",
+    define: {
+        underscored: true
+    },
     logging: (sql) =>
         process.env.NODE_ENV !== "production" ? logger.debug(sql) : undefined
 });

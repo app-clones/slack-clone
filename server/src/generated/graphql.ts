@@ -4,6 +4,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -30,9 +31,48 @@ export type Message = {
   user: User;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createChannel: Scalars['Boolean'];
+  createMessage: Scalars['Boolean'];
+  createTeam: Scalars['Boolean'];
+  createUser: User;
+};
+
+
+export type MutationCreateChannelArgs = {
+  name: Scalars['String'];
+  public?: InputMaybe<Scalars['Boolean']>;
+  teamId: Scalars['Int'];
+};
+
+
+export type MutationCreateMessageArgs = {
+  channelId: Scalars['Int'];
+  text: Scalars['String'];
+};
+
+
+export type MutationCreateTeamArgs = {
+  name: Scalars['String'];
+};
+
+
+export type MutationCreateUserArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  hi?: Maybe<Scalars['String']>;
+  allUsers: Array<User>;
+  getUser: User;
+};
+
+
+export type QueryGetUserArgs = {
+  id: Scalars['Int'];
 };
 
 export type Team = {
@@ -123,6 +163,7 @@ export type ResolversTypes = {
   Channel: ResolverTypeWrapper<Channel>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Message: ResolverTypeWrapper<Message>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Team: ResolverTypeWrapper<Team>;
@@ -135,6 +176,7 @@ export type ResolversParentTypes = {
   Channel: Channel;
   Int: Scalars['Int'];
   Message: Message;
+  Mutation: {};
   Query: {};
   String: Scalars['String'];
   Team: Team;
@@ -158,8 +200,16 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createChannel?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateChannelArgs, 'name' | 'public' | 'teamId'>>;
+  createMessage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateMessageArgs, 'channelId' | 'text'>>;
+  createTeam?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateTeamArgs, 'name'>>;
+  createUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'password' | 'username'>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  hi?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  allUsers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+  getUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<QueryGetUserArgs, 'id'>>;
 };
 
 export type TeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['Team'] = ResolversParentTypes['Team']> = {
@@ -180,6 +230,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 export type Resolvers<ContextType = any> = {
   Channel?: ChannelResolvers<ContextType>;
   Message?: MessageResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Team?: TeamResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

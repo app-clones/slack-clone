@@ -1129,6 +1129,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-tools/load-files@npm:^6.6.0":
+  version: 6.6.0
+  resolution: "@graphql-tools/load-files@npm:6.6.0"
+  dependencies:
+    globby: 11.1.0
+    tslib: ^2.4.0
+    unixify: 1.0.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: cf473e9ce5ee7997f68a76b5e786a54341938e5f03323556c2219efa963b3df6da7767f8d9e51398827088149d0943b01b59d987c6473c263fed3c9efa5efbac
+  languageName: node
+  linkType: hard
+
 "@graphql-tools/load@npm:^7.3.0, @graphql-tools/load@npm:^7.5.5":
   version: 7.7.0
   resolution: "@graphql-tools/load@npm:7.7.0"
@@ -1143,7 +1156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:8.3.0, @graphql-tools/merge@npm:^8.2.6":
+"@graphql-tools/merge@npm:8.3.0, @graphql-tools/merge@npm:^8.2.6, @graphql-tools/merge@npm:^8.3.0":
   version: 8.3.0
   resolution: "@graphql-tools/merge@npm:8.3.0"
   dependencies:
@@ -4253,7 +4266,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^11.0.3, globby@npm:^11.1.0":
+"globby@npm:11.1.0, globby@npm:^11.0.3, globby@npm:^11.1.0":
   version: 11.1.0
   resolution: "globby@npm:11.1.0"
   dependencies:
@@ -7035,6 +7048,8 @@ __metadata:
     "@graphql-codegen/cli": 2.6.4
     "@graphql-codegen/typescript": 2.5.1
     "@graphql-codegen/typescript-resolvers": 2.6.6
+    "@graphql-tools/load-files": ^6.6.0
+    "@graphql-tools/merge": ^8.3.0
     "@types/node": ^18.0.0
     "@typescript-eslint/eslint-plugin": ^5.30.3
     "@typescript-eslint/parser": ^5.30.3
@@ -7785,7 +7800,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unixify@npm:^1.0.0":
+"unixify@npm:1.0.0, unixify@npm:^1.0.0":
   version: 1.0.0
   resolution: "unixify@npm:1.0.0"
   dependencies:
