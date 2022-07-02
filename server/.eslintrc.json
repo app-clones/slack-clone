@@ -10,6 +10,7 @@
         "sourceType": "module",
         "project": "tsconfig.json"
     },
+    "ignorePatterns": ["src/generated/graphql.ts"],
     "plugins": ["@typescript-eslint"],
     "rules": {
         "@typescript-eslint/quotes": ["error", "double"],

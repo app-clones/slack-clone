@@ -25,30 +25,48 @@ for (const modelDefiner of modelDefiners) {
 
 // Relationships
 
+// User
+
 models.user.belongsToMany(models.team, {
     through: "member",
-    foreignKey: "userId"
+    foreignKey: { name: "userId", field: "user_id" }
 });
+
+models.user.belongsToMany(models.channel, {
+    through: "channel_member",
+    foreignKey: { name: "userId", field: "user_id" }
+});
+
+// Team
 
 models.team.belongsToMany(models.user, {
     through: "member",
-    foreignKey: "teamId"
+    foreignKey: { name: "teamId", field: "team_id" }
 });
 
 models.team.belongsTo(models.user, {
     foreignKey: "owner"
 });
 
+// Message
+
 models.message.belongsTo(models.channel, {
-    foreignKey: "channelId"
+    foreignKey: { name: "channelId", field: "channel_id" }
 });
 
 models.message.belongsTo(models.user, {
-    foreignKey: "userId"
+    foreignKey: { name: "userId", field: "user_id" }
 });
 
+// Channel
+
 models.channel.belongsTo(models.team, {
-    foreignKey: "teamId"
+    foreignKey: { name: "teamId", field: "team_id" }
+});
+
+models.channel.belongsToMany(models.user, {
+    through: "channel_member",
+    foreignKey: { name: "channelId", field: "channel_id" }
 });
 
 export default sequelize;
