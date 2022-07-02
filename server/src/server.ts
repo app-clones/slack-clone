@@ -29,7 +29,7 @@ export default async function startApolloServer() {
     const httpServer = http.createServer(app);
 
     const typeDefs = mergeTypeDefs(
-        loadFilesSync(path.join(__dirname, "./modules/**/**.schema.ts"))
+        loadFilesSync(path.join(__dirname, "./modules/**/**.graphql"))
     );
 
     const resolverFiles = loadFilesSync(
