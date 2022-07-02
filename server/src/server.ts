@@ -12,7 +12,7 @@ import express from "express";
 
 import http from "http";
 import logger from "./utils/logger";
-import sequelize from "./models";
+import sequelize from "./utils/sequilize";
 
 export default async function startApolloServer() {
     const app = express();
@@ -29,11 +29,11 @@ export default async function startApolloServer() {
     const httpServer = http.createServer(app);
 
     const typeDefs = mergeTypeDefs(
-        loadFilesSync(path.join(__dirname, "./schemas/**/*.ts"))
+        loadFilesSync(path.join(__dirname, "./modules/**/**.schema.ts"))
     );
 
     const resolverFiles = loadFilesSync(
-        path.join(__dirname, "./resolvers/**/*.ts")
+        path.join(__dirname, "./modules/**/**.resolver.ts")
     );
 
     const resolvers = mergeResolvers(resolverFiles);

@@ -1,6 +1,6 @@
-import { Resolvers, User } from "../generated/graphql";
+import { Resolvers, User } from "../../types/graphql";
 
-import { Context } from "../types/types";
+import { Context } from "../../types/types";
 
 const userResolver: Resolvers<Context> = {
     Query: {

@@ -1,10 +1,10 @@
 import { Sequelize } from "sequelize";
-import logger from "../utils/logger";
+import logger from "./logger";
 
-import channel from "./channel";
-import message from "./message";
-import team from "./team";
-import user from "./user";
+import channel from "../modules/channel/channel.model";
+import message from "../modules/message/message.model";
+import team from "../modules/team/team.model";
+import user from "../modules/user/user.model";
 
 const sequelize = new Sequelize({
     dialect: "postgres",

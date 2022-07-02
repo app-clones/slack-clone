@@ -1,7 +1,7 @@
-import { Resolvers } from "../generated/graphql";
-import { Context } from "../types/types";
+import { Resolvers } from "../../types/graphql";
+import { Context } from "../../types/types";
 
-import logger from "../utils/logger";
+import logger from "../../utils/logger";
 
 const messageResolver: Resolvers<Context> = {
     Mutation: {
