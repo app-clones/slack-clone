@@ -30,6 +30,7 @@
         "react/jsx-filename-extension": 0,
         "arrow-body-style": 0,
         "react/state-in-constructor": 0,
-        "object-curly-newline": 0
+        "object-curly-newline": 0,
+        "operator-linebreak": 0
     }
 }

@@ -12,7 +12,7 @@ const allUsersQuery = gql`
 const Home = () => {
     const { loading, data } = useQuery(allUsersQuery);
 
-    return loading
+    return loading || !data.allUsers
         ? null
         : data.allUsers.map((u: any) => <h1 key={u.id}>{u.email}</h1>);
 };

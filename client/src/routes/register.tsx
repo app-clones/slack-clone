@@ -1,34 +1,84 @@
-import { gql, useMutation } from "@apollo/client";
-
+import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 
-import { Button, Container, Header, Input } from "semantic-ui-react";
+import { gql, useMutation } from "@apollo/client";
+
+import { Button, Container, Header, Input, Message } from "semantic-ui-react";
 
 const registerMutation = gql`
     mutation ($username: String!, $email: String!, $password: String!) {
-        register(username: $username, email: $email, password: $password)
+        register(username: $username, email: $email, password: $password) {
+            ok
+            errors {
+                path
+                message
+            }
+        }
     }
 `;
 
 const Register = () => {
+    const navigate = useNavigate();
+
     const [registerUser, { loading }] = useMutation(registerMutation);
 
     const [formData, setFormData] = useState({
         username: "",
+        usernameError: "",
         email: "",
-        password: ""
+        emailError: "",
+        password: "",
+        passwordError: ""
     });
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
-        setFormData({ ...formData, [name]: value });
+        setFormData({
+            ...formData,
+            [name]: value,
+            [`${name}Error`]: ""
+        });
     };
 
     const onSubmit = async () => {
-        const res = await registerUser({ variables: formData });
-        console.log(res);
+        const { username, email, password } = formData;
+
+        const res = await registerUser({
+            variables: { username, email, password }
+        });
+
+        const { ok, errors } = res.data.register;
+
+        if (ok) {
+            navigate("/home");
+        } else {
+            const err = {};
+
+            errors.forEach(
+                ({ path, message }: { path: string; message: string }) => {
+                    // @ts-ignore
+                    err[`${path}Error`] = message;
+                }
+            );
+
+            setFormData({ ...formData, ...err });
+        }
     };
+
+    const errors = [];
+
+    if (formData.usernameError) {
+        errors.push(formData.usernameError);
+    }
+
+    if (formData.emailError) {
+        errors.push(formData.emailError);
+    }
+
+    if (formData.passwordError) {
+        errors.push(formData.passwordError);
+    }
 
     return (
         <Container text>
@@ -39,6 +89,7 @@ const Register = () => {
                 value={formData.username}
                 placeholder="Username"
                 fluid
+                error={formData.usernameError !== ""}
             />
             <Input
                 name="email"
@@ -46,6 +97,7 @@ const Register = () => {
                 value={formData.email}
                 placeholder="Email"
                 fluid
+                error={formData.emailError !== ""}
             />
             <Input
                 name="password"
@@ -54,11 +106,16 @@ const Register = () => {
                 placeholder="Password"
                 type="password"
                 fluid
+                error={formData.passwordError !== ""}
             />
 
             <Button loading={loading} onClick={onSubmit}>
                 Register
             </Button>
+
+            {errors.length > 0 && (
+                <Message error header="Error" list={errors} />
+            )}
         </Container>
     );
 };
