@@ -555,7 +555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.0":
+"@types/react@npm:*, @types/react@npm:^18.0.14":
   version: 18.0.14
   resolution: "@types/react@npm:18.0.14"
   dependencies:
@@ -1063,7 +1063,7 @@ __metadata:
   resolution: "client@workspace:."
   dependencies:
     "@apollo/client": ^3.6.9
-    "@types/react": ^18.0.0
+    "@types/react": ^18.0.14
     "@types/react-dom": ^18.0.0
     "@typescript-eslint/eslint-plugin": ^5.13.0
     "@typescript-eslint/parser": ^5.0.0
