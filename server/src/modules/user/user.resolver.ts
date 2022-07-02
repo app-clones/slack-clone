@@ -1,6 +1,9 @@
+import argon2 from "argon2";
+
 import { Resolvers, User } from "../../types/graphql";
 
 import { Context } from "../../types/types";
+import logger from "../../utils/logger";
 
 const userResolver: Resolvers<Context> = {
     Query: {
@@ -16,11 +19,20 @@ const userResolver: Resolvers<Context> = {
         }
     },
     Mutation: {
-        createUser: async (_, args, { models }) => {
-            const createdUser = (await models.user.create(
-                args
-            )) as unknown as User;
-            return createdUser;
+        register: async (_, args, { models }) => {
+            try {
+                const hashedPassword = await argon2.hash(args.password);
+
+                await models.user.create({
+                    ...args,
+                    password: hashedPassword
+                });
+
+                return true;
+            } catch (error) {
+                logger.error(error);
+                return false;
+            }
         }
     }
 };

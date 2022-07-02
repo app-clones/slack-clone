@@ -27,6 +27,9 @@
         "react/react-in-jsx-scope": 0,
         "react/jsx-one-expression-per-line": 0,
         "no-shadow": 0,
-        "react/jsx-filename-extension": 0
+        "react/jsx-filename-extension": 0,
+        "arrow-body-style": 0,
+        "react/state-in-constructor": 0,
+        "object-curly-newline": 0
     }
 }
