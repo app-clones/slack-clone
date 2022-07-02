@@ -1117,7 +1117,7 @@ __metadata:
     eslint-config-airbnb: latest
     eslint-config-airbnb-typescript: ^17.0.0
     eslint-plugin-import: ^2.25.3
-    eslint-plugin-jsx-a11y: ^6.5.1
+    eslint-plugin-jsx-a11y: ^6.6.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-react-hooks: ^4.3.0
     graphql: ^16.5.0
@@ -1745,7 +1745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsx-a11y@npm:^6.5.1":
+"eslint-plugin-jsx-a11y@npm:^6.6.0":
   version: 6.6.0
   resolution: "eslint-plugin-jsx-a11y@npm:6.6.0"
   dependencies:
