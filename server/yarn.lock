@@ -7056,6 +7056,7 @@ __metadata:
     apollo-server: ^3.9.0
     apollo-server-core: ^3.9.0
     apollo-server-express: ^3.9.0
+    cors: ^2.8.5
     eslint: ^7.32.0 || ^8.2.0
     eslint-config-airbnb-base: latest
     eslint-config-airbnb-typescript: ^17.0.0

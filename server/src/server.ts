@@ -1,21 +1,24 @@
 import path from "path";
+import http from "http";
 
 import { ApolloServer } from "apollo-server-express";
-
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+
 import expressPlayground from "graphql-playground-middleware-express";
 
 import { mergeTypeDefs, mergeResolvers } from "@graphql-tools/merge";
 import { loadFilesSync } from "@graphql-tools/load-files";
 
 import express from "express";
+import cors from "cors";
 
-import http from "http";
 import logger from "./utils/logger";
 import sequelize from "./utils/sequilize";
 
 export default async function startApolloServer() {
     const app = express();
+
+    app.use(cors({ origin: "http://localhost:3000" }));
 
     app.use(express.json());
 
