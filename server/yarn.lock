@@ -3397,10 +3397,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv-safe@npm:^8.2.0":
+  version: 8.2.0
+  resolution: "dotenv-safe@npm:8.2.0"
+  dependencies:
+    dotenv: ^8.2.0
+  checksum: 8b73770330528d77630009afa44239127c44d634b0fa7d7545932a8e72686d774ceadea62d381ed7c911e0facac4ee1489132e44b746f36eb8f2e3ee6929eb78
+  languageName: node
+  linkType: hard
+
 "dotenv@npm:^16.0.0":
   version: 16.0.1
   resolution: "dotenv@npm:16.0.1"
   checksum: f459ffce07b977b7f15d8cc4ee69cdff77d4dd8c5dc8c85d2d485ee84655352c2415f9dd09d42b5b5985ced3be186130871b34e2f3e2569ebc72fbc2e8096792
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^8.2.0":
+  version: 8.6.0
+  resolution: "dotenv@npm:8.6.0"
+  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
   languageName: node
   linkType: hard
 
@@ -7158,6 +7174,7 @@ __metadata:
     apollo-server-express: ^3.9.0
     argon2: ^0.28.5
     cors: ^2.8.5
+    dotenv-safe: ^8.2.0
     eslint: ^7.32.0 || ^8.2.0
     eslint-config-airbnb-base: latest
     eslint-config-airbnb-typescript: ^17.0.0
@@ -7165,6 +7182,7 @@ __metadata:
     express: ^4.18.1
     graphql: ^16.5.0
     graphql-playground-middleware-express: ^1.7.23
+    jsonwebtoken: ^8.5.1
     lodash: ^4.17.21
     nodemon: ^2.0.18
     pg: ^8.7.3

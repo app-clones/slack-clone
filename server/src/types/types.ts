@@ -7,4 +7,6 @@ export type Context = {
     user: {
         id: number;
     };
+    SECRET: string;
+    REFRESH_TOKEN_SECRET: string;
 };

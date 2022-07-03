@@ -1,11 +1,12 @@
 import { pick } from "lodash";
-import argon2 from "argon2";
 import { ValidationError } from "sequelize";
 
 import { Resolvers, User } from "../../types/graphql";
-
 import { Context } from "../../types/types";
+
 import logger from "../../utils/logger";
+
+import { login } from "../shared/auth";
 
 const formatErrors = (e: any) => {
     if (e instanceof ValidationError) {
@@ -30,28 +31,17 @@ const userResolver: Resolvers<Context> = {
         }
     },
     Mutation: {
+        login: (
+            __,
+            { email, password },
+            { models, SECRET, REFRESH_TOKEN_SECRET }
+        ) => login(email, password, models, SECRET, REFRESH_TOKEN_SECRET),
         // @ts-ignore
         register: async (__, args, { models }) => {
             try {
-                if (args.password.length < 5 || args.password.length > 50) {
-                    return {
-                        ok: false,
-                        errors: [
-                            {
-                                path: "password",
-                                message:
-                                    "Password length must be between 5 and 50 characters"
-                            }
-                        ]
-                    };
-                }
-
-                const hashedPassword = await argon2.hash(args.password);
-
-                const user = (await models.user.create({
-                    ...args,
-                    password: hashedPassword
-                })) as unknown as User;
+                const user = (await models.user.create(
+                    args
+                )) as unknown as User;
 
                 return { ok: true, user };
             } catch (error) {

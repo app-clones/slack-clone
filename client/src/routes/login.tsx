@@ -1,14 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
 
-import { Button, Header, Form, Container } from "semantic-ui-react";
+import { Container, Header, Button, Form } from "semantic-ui-react";
 
-const registerMutation = gql`
-    mutation ($username: String!, $email: String!, $password: String!) {
-        register(username: $username, email: $email, password: $password) {
+const loginMutation = gql`
+    mutation ($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
             ok
+            token
+            refreshToken
             errors {
                 path
                 message
@@ -17,40 +18,32 @@ const registerMutation = gql`
     }
 `;
 
-const Register = () => {
+const Login = () => {
+    const [login, { loading }] = useMutation(loginMutation);
     const navigate = useNavigate();
 
-    const [registerUser, { loading }] = useMutation(registerMutation);
-
     const [formData, setFormData] = useState({
-        username: "",
-        usernameError: "",
         email: "",
         emailError: "",
         password: "",
         passwordError: ""
     });
 
+    const { email, password } = formData;
+
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
-        setFormData({
-            ...formData,
-            [name]: value,
-            [`${name}Error`]: ""
-        });
+        setFormData({ ...formData, [name]: value });
     };
 
     const onSubmit = async () => {
-        const { username, email, password } = formData;
-
-        const res = await registerUser({
-            variables: { username, email, password }
-        });
-
-        const { ok, errors } = res.data.register;
+        const res = await login({ variables: { email, password } });
+        const { ok, refreshToken, token, errors } = res.data.login;
 
         if (ok) {
+            localStorage.setItem("token", token);
+            localStorage.setItem("refreshToken", refreshToken);
             navigate("/home");
         } else {
             const err = {};
@@ -68,36 +61,20 @@ const Register = () => {
 
     return (
         <Container text>
-            <Header as="h2">Register</Header>
+            <Header as="h2">Login</Header>
             <Form>
-                <Form.Input
-                    error={
-                        formData.usernameError !== ""
-                            ? {
-                                  content: formData.usernameError,
-                                  pointing: "above"
-                              }
-                            : null
-                    }
-                    name="username"
-                    onChange={onChange}
-                    value={formData.username}
-                    placeholder="Username"
-                    fluid
-                />
-
                 <Form.Input
                     error={
                         formData.emailError !== ""
                             ? {
                                   content: formData.emailError,
-                                  pointing: "above"
+                                  pointing: "below"
                               }
                             : null
                     }
                     name="email"
                     onChange={onChange}
-                    value={formData.email}
+                    value={email}
                     placeholder="Email"
                     fluid
                 />
@@ -107,24 +84,24 @@ const Register = () => {
                         formData.passwordError !== ""
                             ? {
                                   content: formData.passwordError,
-                                  pointing: "above"
+                                  pointing: "below"
                               }
                             : null
                     }
                     name="password"
                     onChange={onChange}
-                    value={formData.password}
+                    value={password}
                     placeholder="Password"
                     type="password"
                     fluid
                 />
 
                 <Button loading={loading} onClick={onSubmit}>
-                    Register
+                    Login
                 </Button>
             </Form>
         </Container>
     );
 };
 
-export default Register;
+export default Login;

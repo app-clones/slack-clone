@@ -1,3 +1,5 @@
+import "dotenv-safe/config";
+
 import path from "path";
 import http from "http";
 
@@ -50,7 +52,9 @@ export default async function startApolloServer() {
             models: sequelize.models,
             user: {
                 id: 1
-            }
+            },
+            SECRET: process.env.JWT_SECRET,
+            REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET
         },
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
     });
