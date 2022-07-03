@@ -17,5 +17,8 @@ jobs:
             - name: Install dependencies
               run: cd server && yarn install
 
-            - name: ESLint
+            - name: ESLint Server
               run: cd server && yarn lint
+
+            - name: ESLint Client
+              run: cd client && yarn lint
