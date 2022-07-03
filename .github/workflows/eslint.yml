@@ -15,7 +15,7 @@ jobs:
                   node-version: 18
 
             - name: Install dependencies
-              run: cd server && yarn install
+              run: cd server && yarn install && cd ../client && yarn install
 
             - name: ESLint Server
               run: cd server && yarn lint
