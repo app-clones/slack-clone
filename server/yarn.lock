@@ -1210,7 +1210,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-tools/merge@npm:8.3.0, @graphql-tools/merge@npm:^8.2.6, @graphql-tools/merge@npm:^8.3.0":
+"@graphql-tools/merge@npm:8.3.0, @graphql-tools/merge@npm:^8.2.6":
   version: 8.3.0
   resolution: "@graphql-tools/merge@npm:8.3.0"
   dependencies:
@@ -1219,6 +1219,18 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: f2239149d8a816d1158c5bf9f2507662faf7f77eeb8d6f6962111f69d7aedab1557f6cd8beac75bf62f0caf56a3c98ba83608207cd0614ad3119c68390d86bbe
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/merge@npm:^8.3.1":
+  version: 8.3.1
+  resolution: "@graphql-tools/merge@npm:8.3.1"
+  dependencies:
+    "@graphql-tools/utils": 8.9.0
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 16af6be2249f4f500a4c2f5d3db2e0efd56ad69b5e10499649c6fc979c257af12e131112304a16699654b54daab37a80737e0538478bc45a0053b9bc859a7ac1
   languageName: node
   linkType: hard
 
@@ -1362,6 +1374,17 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
   checksum: 631aa690fcf7c01c42829af93f2af1c62d2eeaca99a74f2ae9d6424b7662383391fff37443d61f76fd9f00243b33d0ba0a7df8792c835e1db1fd1b4cee2f32f0
+  languageName: node
+  linkType: hard
+
+"@graphql-tools/utils@npm:8.9.0":
+  version: 8.9.0
+  resolution: "@graphql-tools/utils@npm:8.9.0"
+  dependencies:
+    tslib: ^2.4.0
+  peerDependencies:
+    graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 8d1d8a11722e211dc8723cd3fd7a97fa5401ab22146e4240a0f9d45547792476c34814ff914524578beec961db7b0ff23a6ddff8fe059764537e594cff35c906
   languageName: node
   linkType: hard
 
@@ -6598,7 +6621,7 @@ __metadata:
     "@graphql-codegen/typescript": 2.7.2
     "@graphql-codegen/typescript-resolvers": 2.7.2
     "@graphql-tools/load-files": ^6.6.0
-    "@graphql-tools/merge": ^8.3.0
+    "@graphql-tools/merge": ^8.3.1
     "@types/lodash": ^4.14.182
     "@types/node": ^18.0.0
     "@typescript-eslint/eslint-plugin": ^5.31.0
