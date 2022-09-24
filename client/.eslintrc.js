@@ -11,7 +11,8 @@ module.exports = {
         },
         ecmaVersion: "latest",
         sourceType: "module",
-        project: "./client/tsconfig.eslint.json"
+        project: "./tsconfig.eslint.json",
+        tsconfigRootDir: __dirname.includes("client") ? "./" : __dirname
     },
     plugins: ["react", "@typescript-eslint"],
     rules: {
