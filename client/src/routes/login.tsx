@@ -44,7 +44,7 @@ const Login = () => {
         if (ok) {
             localStorage.setItem("token", token);
             localStorage.setItem("refreshToken", refreshToken);
-            navigate("/home");
+            navigate("/");
         } else {
             const err = {};
 
@@ -65,12 +65,10 @@ const Login = () => {
             <Form>
                 <Form.Input
                     error={
-                        formData.emailError !== ""
-                            ? {
-                                  content: formData.emailError,
-                                  pointing: "below"
-                              }
-                            : null
+                        formData.emailError !== "" && {
+                            content: formData.emailError,
+                            pointing: "below"
+                        }
                     }
                     name="email"
                     onChange={onChange}
@@ -81,12 +79,10 @@ const Login = () => {
 
                 <Form.Input
                     error={
-                        formData.passwordError !== ""
-                            ? {
-                                  content: formData.passwordError,
-                                  pointing: "below"
-                              }
-                            : null
+                        formData.passwordError !== "" && {
+                            content: formData.passwordError,
+                            pointing: "below"
+                        }
                     }
                     name="password"
                     onChange={onChange}

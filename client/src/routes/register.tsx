@@ -51,7 +51,7 @@ const Register = () => {
         const { ok, errors } = res.data.register;
 
         if (ok) {
-            navigate("/home");
+            navigate("/");
         } else {
             const err = {};
 
@@ -72,12 +72,10 @@ const Register = () => {
             <Form>
                 <Form.Input
                     error={
-                        formData.usernameError !== ""
-                            ? {
-                                  content: formData.usernameError,
-                                  pointing: "above"
-                              }
-                            : null
+                        formData.usernameError !== "" && {
+                            content: formData.usernameError,
+                            pointing: "above"
+                        }
                     }
                     name="username"
                     onChange={onChange}
@@ -88,12 +86,10 @@ const Register = () => {
 
                 <Form.Input
                     error={
-                        formData.emailError !== ""
-                            ? {
-                                  content: formData.emailError,
-                                  pointing: "above"
-                              }
-                            : null
+                        formData.emailError !== "" && {
+                            content: formData.emailError,
+                            pointing: "above"
+                        }
                     }
                     name="email"
                     onChange={onChange}
@@ -104,12 +100,10 @@ const Register = () => {
 
                 <Form.Input
                     error={
-                        formData.passwordError !== ""
-                            ? {
-                                  content: formData.passwordError,
-                                  pointing: "above"
-                              }
-                            : null
+                        formData.passwordError !== "" && {
+                            content: formData.passwordError,
+                            pointing: "above"
+                        }
                     }
                     name="password"
                     onChange={onChange}

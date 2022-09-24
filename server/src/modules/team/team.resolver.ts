@@ -1,6 +1,7 @@
 import { Resolvers } from "../../types/graphql";
 import { Context } from "../../types/types";
 
+import formatErrors from "../../utils/formatErrors";
 import logger from "../../utils/logger";
 
 const teamResolver: Resolvers<Context> = {
@@ -8,10 +9,10 @@ const teamResolver: Resolvers<Context> = {
         createTeam: async (_, args, { models, user }) => {
             try {
                 await models.team.create({ ...args, owner: user.id });
-                return true;
+                return { ok: true };
             } catch (error) {
                 logger.error(error);
-                return false;
+                return { ok: false, errors: formatErrors(error) };
             }
         }
     }

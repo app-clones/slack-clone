@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import _ from "lodash";
 import argon2 from "argon2";
 
-import { User } from "../../types/graphql";
+import { User } from "../types/graphql";
 
 export const createTokens = async (
     user: User,
@@ -36,7 +36,8 @@ export const refreshTokens = async (
     __: any,
     refreshToken: string,
     models: any,
-    SECRET: string
+    SECRET: string,
+    SECRET2: string
 ) => {
     let userId = -1;
 
@@ -50,21 +51,19 @@ export const refreshTokens = async (
         return {};
     }
 
-    if (!userId) {
-        return {};
-    }
+    if (!userId) return {};
 
     const user = await models.user.findOne({
         where: { id: userId },
         raw: true
     });
 
-    if (!user) {
-        return {};
-    }
+    if (!user) return {};
+
+    const refreshSecret = user.password + SECRET2;
 
     try {
-        jwt.verify(refreshToken, user.refreshSecret);
+        jwt.verify(refreshToken, refreshSecret);
     } catch (err) {
         return {};
     }
@@ -72,7 +71,7 @@ export const refreshTokens = async (
     const [newToken, newRefreshToken] = await createTokens(
         user,
         SECRET,
-        user.refreshSecret
+        refreshSecret
     );
     return {
         token: newToken,

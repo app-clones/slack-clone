@@ -1,21 +1,10 @@
-import { pick } from "lodash";
-import { ValidationError } from "sequelize";
-
 import { Resolvers, User } from "../../types/graphql";
 import { Context } from "../../types/types";
+import formatErrors from "../../utils/formatErrors";
 
 import logger from "../../utils/logger";
 
-import { login } from "../shared/auth";
-
-const formatErrors = (e: any) => {
-    if (e instanceof ValidationError) {
-        //  _.pick({a: 1, b: 2}, 'a') => {a: 1}
-        return e.errors.map((x) => pick(x, ["path", "message"]));
-    }
-
-    return [{ path: "name", message: "something went wrong" }];
-};
+import { login } from "../../utils/auth";
 
 const userResolver: Resolvers<Context> = {
     Query: {

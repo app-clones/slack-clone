@@ -1,4 +1,6 @@
+import { Request } from "express";
 import { ModelStatic, Model } from "sequelize/types";
+import { User } from "./graphql";
 
 export type Context = {
     models: {
@@ -10,3 +12,7 @@ export type Context = {
     SECRET: string;
     REFRESH_TOKEN_SECRET: string;
 };
+
+export interface MyRequest extends Request {
+    user?: User;
+}

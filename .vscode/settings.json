@@ -13,5 +13,6 @@
     },
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow.json": "file:///home/beatzoid/Coding-Projects/app-clones/slack-clone/.github/workflows/build.yml"
-    }
+    },
+    "cSpell.words": ["sequilize"]
 }

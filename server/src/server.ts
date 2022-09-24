@@ -4,7 +4,10 @@ import path from "path";
 import http from "http";
 
 import { ApolloServer } from "apollo-server-express";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
+import {
+    ApolloServerPluginDrainHttpServer,
+    ApolloServerPluginLandingPageGraphQLPlayground
+} from "apollo-server-core";
 
 import expressPlayground from "graphql-playground-middleware-express";
 
@@ -16,13 +19,23 @@ import cors from "cors";
 
 import logger from "./utils/logger";
 import sequelize from "./utils/sequilize";
+import addUser from "./middleware/user";
+
+import { MyRequest } from "./types/types";
 
 export default async function startApolloServer() {
     const app = express();
 
-    app.use(cors({ origin: "http://localhost:3000" }));
+    app.use(
+        cors({
+            origin: ["http://localhost:3000"],
+            credentials: true
+        })
+    );
 
     app.use(express.json());
+
+    app.use(addUser);
 
     app.get(
         "/playground",
@@ -48,15 +61,16 @@ export default async function startApolloServer() {
         resolvers,
         csrfPrevention: true,
         cache: "bounded",
-        context: {
+        context: ({ req }: { req: MyRequest }) => ({
             models: sequelize.models,
-            user: {
-                id: 1
-            },
+            user: req.user,
             SECRET: process.env.JWT_SECRET,
             REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET
-        },
-        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
+        }),
+        plugins: [
+            ApolloServerPluginDrainHttpServer({ httpServer }),
+            ApolloServerPluginLandingPageGraphQLPlayground()
+        ]
     });
 
     await server.start();

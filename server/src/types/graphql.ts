@@ -23,10 +23,16 @@ export type Channel = {
   users: Array<User>;
 };
 
+export type CreateTeamResponse = {
+  __typename?: 'CreateTeamResponse';
+  errors?: Maybe<Array<Error>>;
+  ok: Scalars['Boolean'];
+};
+
 export type Error = {
   __typename?: 'Error';
   message?: Maybe<Scalars['String']>;
-  path: Scalars['String'];
+  path?: Maybe<Scalars['String']>;
 };
 
 export type LoginResponse = {
@@ -49,7 +55,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createChannel: Scalars['Boolean'];
   createMessage: Scalars['Boolean'];
-  createTeam: Scalars['Boolean'];
+  createTeam: CreateTeamResponse;
   login: LoginResponse;
   register: RegisterResponse;
 };
@@ -189,6 +195,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Channel: ResolverTypeWrapper<Channel>;
+  CreateTeamResponse: ResolverTypeWrapper<CreateTeamResponse>;
   Error: ResolverTypeWrapper<Error>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   LoginResponse: ResolverTypeWrapper<LoginResponse>;
@@ -205,6 +212,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Channel: Channel;
+  CreateTeamResponse: CreateTeamResponse;
   Error: Error;
   Int: Scalars['Int'];
   LoginResponse: LoginResponse;
@@ -226,9 +234,15 @@ export type ChannelResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type CreateTeamResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['CreateTeamResponse'] = ResolversParentTypes['CreateTeamResponse']> = {
+  errors?: Resolver<Maybe<Array<ResolversTypes['Error']>>, ParentType, ContextType>;
+  ok?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ErrorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Error'] = ResolversParentTypes['Error']> = {
   message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  path?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -251,7 +265,7 @@ export type MessageResolvers<ContextType = any, ParentType extends ResolversPare
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createChannel?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateChannelArgs, 'name' | 'public' | 'teamId'>>;
   createMessage?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateMessageArgs, 'channelId' | 'text'>>;
-  createTeam?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationCreateTeamArgs, 'name'>>;
+  createTeam?: Resolver<ResolversTypes['CreateTeamResponse'], ParentType, ContextType, RequireFields<MutationCreateTeamArgs, 'name'>>;
   login?: Resolver<ResolversTypes['LoginResponse'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>;
   register?: Resolver<ResolversTypes['RegisterResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'email' | 'password' | 'username'>>;
 };
@@ -285,6 +299,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 
 export type Resolvers<ContextType = any> = {
   Channel?: ChannelResolvers<ContextType>;
+  CreateTeamResponse?: CreateTeamResponseResolvers<ContextType>;
   Error?: ErrorResolvers<ContextType>;
   LoginResponse?: LoginResponseResolvers<ContextType>;
   Message?: MessageResolvers<ContextType>;
