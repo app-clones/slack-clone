@@ -9,7 +9,7 @@ module.exports = {
         ecmaVersion: "latest",
         sourceType: "module",
         project: "./tsconfig.eslint.json",
-        tsconfigRootDir: __dirname.includes("server") ? "./" : __dirname
+        tsconfigRootDir: __dirname.includes("server") && __dirname
     },
     ignorePatterns: ["src/types/graphql.ts"],
     plugins: ["@typescript-eslint"],

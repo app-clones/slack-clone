@@ -53,11 +53,10 @@ const Register = () => {
         if (ok) {
             navigate("/");
         } else {
-            const err = {};
+            const err: Record<string, any> = {};
 
             errors.forEach(
                 ({ path, message }: { path: string; message: string }) => {
-                    // @ts-ignore
                     err[`${path}Error`] = message;
                 }
             );

@@ -46,11 +46,10 @@ const Login = () => {
             localStorage.setItem("refreshToken", refreshToken);
             navigate("/");
         } else {
-            const err = {};
+            const err: Record<string, any> = {};
 
             errors.forEach(
                 ({ path, message }: { path: string; message: string }) => {
-                    // @ts-ignore
                     err[`${path}Error`] = message;
                 }
             );

@@ -34,17 +34,24 @@ const CreateTeam = () => {
     };
 
     const onSubmit = async () => {
-        const res = await createTeam({ variables: { name } });
+        let res;
+
+        try {
+            res = await createTeam({ variables: { name } });
+        } catch (err) {
+            navigate("/login");
+            return;
+        }
+
         const { ok, errors } = res.data.createTeam;
 
         if (ok) {
             navigate("/");
         } else {
-            const err = {};
+            const err: Record<string, any> = {};
 
             errors.forEach(
                 ({ path, message }: { path: string; message: string }) => {
-                    // @ts-ignore
                     err[`${path}Error`] = message;
                 }
             );

@@ -12,7 +12,7 @@ module.exports = {
         ecmaVersion: "latest",
         sourceType: "module",
         project: "./tsconfig.eslint.json",
-        tsconfigRootDir: __dirname.includes("client") ? "./" : __dirname
+        tsconfigRootDir: __dirname.includes("client") && __dirname
     },
     plugins: ["react", "@typescript-eslint"],
     rules: {
@@ -27,6 +27,7 @@ module.exports = {
         "react/jsx-indent-props": 0,
         "react/react-in-jsx-scope": 0,
         "react/jsx-one-expression-per-line": 0,
+        "react/jsx-wrap-multilines": 0,
         "no-shadow": 0,
         "@typescript-eslint/no-shadow": 0,
         "react/jsx-filename-extension": 0,
