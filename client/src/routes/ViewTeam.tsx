@@ -1,25 +1,39 @@
-import AppLayout from "../components/AppLayout";
-import Channels from "../components/Channels";
-import Header from "../components/Header";
-import Input from "../components/Input";
-import Messages from "../components/Messages";
-import Teams from "../components/Teams";
+import AppLayout from "../components/AppLayout/AppLayout";
+import Channels from "../components/Channels/Channels";
+import Header from "../components/Header/Header";
+import Messages from "../components/Messages/Messages";
+import Teams from "../components/Teams/Teams";
+import SendMessage from "../components/SendMessage/SendMessage";
 
 const ViewTeam = () => {
     return (
         <AppLayout>
-            <Teams>Teams</Teams>
-            <Channels>Channels</Channels>
-            <Header>Header</Header>
+            <Teams
+                teams={[
+                    { id: 1, initial: "T" },
+                    { id: 2, initial: "B" }
+                ]}
+            />
+            <Channels
+                teamName="Team Name"
+                username="username"
+                channels={[
+                    { id: 1, name: "general" },
+                    { id: 2, name: "random" }
+                ]}
+                users={[
+                    { id: 1, name: "joe" },
+                    { id: 2, name: "bob" }
+                ]}
+            />
+            <Header channelName="announcements" />
             <Messages>
                 <ul className="message-list">
                     <li>hi</li>
                     <li>bye</li>
                 </ul>
             </Messages>
-            <Input>
-                <input type="text" placeholder="CSS Grid Layout Module" />
-            </Input>
+            <SendMessage channelName="general" />
         </AppLayout>
     );
 };
