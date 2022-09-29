@@ -7,4 +7,6 @@ export const TeamWrapper = styled.div`
     color: #958993;
 `;
 
-export const a = "b";
+export const TeamList = styled.ul`
+    width: 100%;
+`;
