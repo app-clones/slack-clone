@@ -34,6 +34,7 @@ module.exports = {
         "arrow-body-style": 0,
         "react/state-in-constructor": 0,
         "object-curly-newline": 0,
-        "operator-linebreak": 0
+        "operator-linebreak": 0,
+        "import/extensions": 0
     }
 };
