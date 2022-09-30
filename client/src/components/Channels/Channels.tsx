@@ -1,12 +1,24 @@
 import { NameId } from "../../globalTypes";
 
-import { ChannelWrapper } from "./channels.styles";
+import {
+    Bubble,
+    ChannelWrapper,
+    PushLeft,
+    SideBarList,
+    SideBarListHeader,
+    SideBarListItem,
+    TeamNameHeader
+} from "./channels.styles";
 
 const channel = ({ id, name }: { id: number; name: string }) => (
-    <li key={`channel-${id}`}># {name}</li>
+    <SideBarListItem key={`channel-${id}`}># {name}</SideBarListItem>
 );
 
-const user = ({ id, name }: NameId) => <li key={`user-${id}`}># {name}</li>;
+const user = ({ id, name }: NameId) => (
+    <SideBarListItem key={`user-${id}`}>
+        <Bubble /> {name}
+    </SideBarListItem>
+);
 
 type ChannelsConfig = {
     teamName: string;
@@ -18,21 +30,21 @@ type ChannelsConfig = {
 const Channels = ({ teamName, username, channels, users }: ChannelsConfig) => {
     return (
         <ChannelWrapper>
-            <div>
-                {teamName}
+            <PushLeft>
+                <TeamNameHeader>{teamName}</TeamNameHeader>
                 {username}
-            </div>
+            </PushLeft>
             <div>
-                <ul>
-                    <li>Channels</li>
+                <SideBarList>
+                    <SideBarListHeader>Channels</SideBarListHeader>
                     {channels.map(channel)}
-                </ul>
+                </SideBarList>
             </div>
             <div>
-                <ul>
-                    <li>Direct Messages</li>
+                <SideBarList>
+                    <SideBarListHeader>Direct Messages</SideBarListHeader>
                     {users.map(user)}
-                </ul>
+                </SideBarList>
             </div>
         </ChannelWrapper>
     );

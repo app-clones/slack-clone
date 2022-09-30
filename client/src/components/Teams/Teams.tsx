@@ -1,7 +1,7 @@
-import { TeamWrapper } from "./teams.styles";
+import { TeamList, TeamListItem, TeamWrapper } from "./teams.styles";
 
-const team = ({ id, initial }: { id: number; initial: string }) => (
-    <li key={`team-${id}`}>{initial}</li>
+const Team = ({ id, initial }: { id: number; initial: string }) => (
+    <TeamListItem key={`team-${id}`}>{initial}</TeamListItem>
 );
 
 type TeamsConfig = {
@@ -11,7 +11,7 @@ type TeamsConfig = {
 const Teams = ({ teams }: TeamsConfig) => {
     return (
         <TeamWrapper>
-            <ul>{teams.map(team)}</ul>
+            <TeamList>{teams.map(Team)}</TeamList>
         </TeamWrapper>
     );
 };
